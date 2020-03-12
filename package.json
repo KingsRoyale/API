@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "The api for Kings Royale",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KingsRoyale/API.git"
+  },
+  "author": "Kings Royale Developer Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KingsRoyale/API/issues"
+  },
+  "homepage": "https://github.com/KingsRoyale/API#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "http": "0.0.0",
+    "mysql": "^2.18.1"
+  }
+}
