@@ -5,12 +5,12 @@ api.get('/:name?', function (req, res) {
   var username = req.params.name;
   var con = req.app.get('MySQLCon');
 
-  con.query("SELECT * FROM userAccounts WHERE username=?", [username], function (err, result) {
+  con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
     if (err) throw err;
     let usernames = [];
     for (var i = 0; i < result.length; i++) {
-      let user = result[i];
-      usernames.push([`${user.username}`]);
+      let kingdom = result[i];
+      usernames.push(kingdom);
     }
     res.send(usernames);
   })
