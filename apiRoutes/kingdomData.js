@@ -2,11 +2,27 @@ const express = require('express');
 const api = express.Router();
 
 api.get('/:name?', function (req, res) {
-  res.send(req.params.name);
+  var username = req.params.name;
+  var con = req.app.get('MySQLCon');
+
+  con.query("SELECT * FROM userAccounts WHERE username=?", [username], function (err, result) {
+    if (err) throw err;
+    let usernames = [];
+    for (var i = 0; i < result.length; i++) {
+      let user = result[i];
+      usernames.push([`${user.username}`]);
+    }
+    res.send(usernames);
+  })
 });
 
 api.post('/createKingdom', function (req, res) {
+  var owner = req.body.user.name;
+  var pswd = req.body.user.pswd;
+  var kname = req.body.kingdom.name;
+  var con = req.app.get('MySQLCon');
   // TODO: add mysql connection and data handling for creating a new kingdom.
 });
+
 
 module.exports = api

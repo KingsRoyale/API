@@ -2,22 +2,25 @@ const express = require("express");
 const app = express();
 const kingdomData = require("./apiRoutes/kingdomData.js");
 var mysql = require('mysql');
+var config = require('./utils/credentials.js');
+var con = mysql.createConnection(config);
 
-var con = mysql.createConnection({
-  host: "localhost",
-  user: "website",
-  password: "IU*(&THHGkjhgfkjg&",
-  database: "kingsroyale"
-});
+app.set("MySQLCon", con);
 
 con.connect(function(err) {
   if (err) throw err;
   console.log("Successfully connected to the database!");
+});
 
-  //CREATE USERACCOUNT TABLE
-  con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), password VARCHAR(255))");
-  //CREATE KINGDOM TABLE
-  con.query("CREATE TABLE IF NOT EXISTS kingdoms (owner VARCHAR(255), name VARCHAR(255), provinces INT(2), towers INT(3), mines INT(3), gold BIGINT, population BIGINT)");
+//CREATE USERACCOUNT TABLE
+con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), password VARCHAR(255))", function (err, result) {
+  if (err) throw err;
+  console.log("userAccounts: Loaded!");
+});
+//CREATE KINGDOM TABLE
+con.query("CREATE TABLE IF NOT EXISTS kingdoms (owner VARCHAR(255), name VARCHAR(255), provinces INT(2), towers INT(3), mines INT(3), gold BIGINT, population BIGINT)", function (err, result) {
+  if (err) throw err;
+  console.log("kingdoms: Loaded!");
 });
 
 
