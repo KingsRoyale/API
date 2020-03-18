@@ -1,9 +1,9 @@
 const express = require('express');
 const api = express.Router();
+const con = require("D:/Coding/KingsRoyale/API/utils/database.js").getConnection();
 
 api.get('/:name?', function (req, res) {
   var username = req.params.name;
-  var con = req.app.get('MySQLCon');
   var kname = "hi";
 
   con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
@@ -33,7 +33,6 @@ api.post('/createKingdom', function (req, res) {
   var owner = req.body.user.name;
   var pswd = req.body.user.pswd;
   var kname = req.body.kingdom.name;
-  var con = req.app.get('MySQLCon');
   // TODO: add mysql connection and data handling for creating a new kingdom.
   con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
     if (err) throw err;

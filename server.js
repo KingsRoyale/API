@@ -2,15 +2,11 @@ const express = require("express");
 const app = express();
 const kingdomData = require("./apiRoutes/kingdomData.js");
 var mysql = require('mysql');
-var config = require('./utils/credentials.js');
-var con = mysql.createConnection(config);
+var db = require('./utils/database.js');
+var con = db.getConnection();
 
-app.set("MySQLCon", con);
 
-con.connect(function(err) {
-  if (err) throw err;
-  console.log("Successfully connected to the database!");
-});
+console.log(db.getDb());
 
 //CREATE USERACCOUNT TABLE
 con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), password VARCHAR(255))", function (err, result) {
