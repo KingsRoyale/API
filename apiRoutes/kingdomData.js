@@ -9,7 +9,7 @@ api.get('/:name?', function (req, res) {
   con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
     if (err) throw err;
 
-    if (result.name != undefined) {
+    if (result != undefined) {
       console.log("You already own a kingdom!");
     } else {
       con.query("SELECT * FROM kingdoms WHERE name=?", [kname], function (err, result) {
@@ -20,12 +20,12 @@ api.get('/:name?', function (req, res) {
 
   con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
     if (err) throw err;
-    let usernames = [];
+    var kingdomData;
     for (var i = 0; i < result.length; i++) {
       let kingdom = result[i];
-      usernames.push(kingdom);
+      kingdomData = kingdom;
     }
-    res.send(usernames);
+    res.send(kingdomData);
   })
 });
 
