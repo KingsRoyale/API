@@ -5,9 +5,6 @@ var mysql = require('mysql');
 var db = require('./utils/database.js');
 var con = db.getConnection();
 
-
-console.log(db.getDb());
-
 //CREATE USERACCOUNT TABLE
 con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), password VARCHAR(255))", function (err, result) {
   if (err) throw err;
@@ -26,7 +23,10 @@ require('events').EventEmitter.defaultMaxListeners = 0;
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-app.use('/api/kingdom/', kingdomData);
+app.get('/', function (req, res) {
+  res.send("hello!");
+})
+app.use('/api/kingdom', kingdomData);
 
 /*
 ==================

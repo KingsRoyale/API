@@ -11,14 +11,12 @@ connection.connect(function (err) {
   }
 });
 
-module.exports = {
+class Database {
 
-  getConnection() {
+  static getConnection() {
     return connection;
-  },
-
-  getDb() {
-    return config.database;
   }
 
-};
+}
+
+module.exports = Database;
