@@ -19,6 +19,13 @@ class KingdomManager {
     });
   }
 
+  static updateKingdom(name, field, value) {
+    con.query("UPDATE kingdoms SET ?=? WHERE name=?", [field, value, name], function(error, response) {
+      if (error) throw error;
+      console.log(`[KINGDOM] ${field} has been set to ${value} for kingdom: ${name}`);
+    })
+  }
+
 }
 
 module.exports = KingdomManager;
