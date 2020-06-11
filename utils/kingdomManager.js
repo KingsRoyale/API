@@ -12,6 +12,13 @@ class KingdomManager {
     });
   }
 
+  static deleteKingdom(name) {
+    con.query("DELETE FROM kingdoms WHERE name=?", [name], function(error, response) {
+      if (error) throw error;
+      console.log(`[KINGDOM] Kingdom has been deleted with the name: ${name}`);
+    });
+  }
+
 }
 
 module.exports = KingdomManager;
