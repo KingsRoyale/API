@@ -4,8 +4,16 @@ const db = require("D:/Coding/KingsRoyale/API/utils/database.js");
 const con = db.getConnection();
 
 app.post("/createAccount", function (req, res) {
-  let uname = req.params.uname;
-  let pswd = req.params.pswd;
-})
+  let uname = req.body.user.name;
+  let pswd = req.body.user.password;
+
+  con.query("SELECT * FROM userAccounts WHERE username=?", [uname], function(error, account) {
+    if (error) throw error;
+    if (account != null || accoutnt != undefined) {
+      res.status
+    }
+  })
+
+});
 
 module.exports = app

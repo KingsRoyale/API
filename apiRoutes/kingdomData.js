@@ -3,31 +3,18 @@ const api = express.Router();
 const db = require("D:/Coding/KingsRoyale/API/utils/database.js");
 const con = db.getConnection();
 
-api.get('/:name?', function (req, res) {
-  var username = req.params.name;
-  var kname = "hi";
-
-  con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
+api.get('/:kname?', function (req, res) {
+  var kname = req.params.kname;
+  con.query("SELECT * FROM kingdoms WHERE name=?", [kname], function (err, result) {
     if (err) throw err;
-
-    if (result != undefined || result != null) {
-      console.log("You already own a kingdom!");
+    if (result[0] != null && result[0] != undefined) {
+      //Just extracts the Kingdom data without [{data}] now its {data}
+      res.send(result[0]);
     } else {
-      con.query("SELECT * FROM kingdoms WHERE name=?", [kname], function (err, result) {
-        console.log('executed');
-      })
+      res.writeHead( 900, 'Kingdom does not exist', {'content-type' : 'text/plain'});
+      res.end( 'Kingdom does not exist!');
     }
-  })
-
-  con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
-    if (err) throw err;
-    var kingdomData;
-    for (var i = 0; i < result.length; i++) {
-      let kingdom = result[i];
-      kingdomData = kingdom;
-    }
-    res.send(kingdomData);
-  })
+  });
 });
 
 api.post('/createKingdom', function (req, res) {
@@ -38,16 +25,16 @@ api.post('/createKingdom', function (req, res) {
   con.query("SELECT password FROM userAccounts WHERE username=?", [owner], function (error, result) {
     if (error) throw error;
 
-    if (result == null || result == undefined) {
-      res.statusMessage = "Account does not exist!";
-      res.status(1000).end();
+    if (result[0] == null || result[0] == undefined) {
+      res.writeHead( 800, 'Account does not exist', {'content-type' : 'text/plain'});
+      res.end( 'Account does not exist!');
     }
 
   });
 
   con.query("SELECT * FROM kingdoms WHERE owner=?", [username], function (err, result) {
     if (err) throw err;
-    if (result.name != null || result.name == undefined) {
+    if (result[0].name == null || result == undefined) {
       res.send("already own kingdom");
       return;
     }

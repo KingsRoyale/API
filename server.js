@@ -10,7 +10,7 @@ con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), passw
   if (err) throw err;
   console.log("userAccounts: Loaded!");
 });
-//CREATE KINGDOM TABLE
+//CREATE KINGDOM TABLE 
 con.query("CREATE TABLE IF NOT EXISTS kingdoms (owner VARCHAR(255), name VARCHAR(255), provinces INT(2), towers INT(3), mines INT(3), gold BIGINT, population BIGINT)", function (err, result) {
   if (err) throw err;
   console.log("kingdoms: Loaded!");
