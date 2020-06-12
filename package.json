@@ -19,6 +19,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "http": "0.0.0",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "object-hash": "^2.0.3"
   }
 }
