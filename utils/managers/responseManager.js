@@ -67,3 +67,5 @@ class ResponseManager {
   }
 
 }
+
+module.exports = ResponseManager;
