@@ -1,6 +1,11 @@
 const mysql = require("mysql");
+const settings = require("./config.js");
 
 function connectDatabase(config) {
+  if (config.database === "kingsroyale0") {
+    console.log(`${config.database} could not be generated as that season does not exist in the database!`);
+    return null;
+  }
   const connection = mysql.createConnection(config);
   connection.connect(function (err) {
       if (err) {
@@ -12,21 +17,11 @@ function connectDatabase(config) {
   });
 }
 
-let settings = {
-  prevousSeason: 0,
-  currentSeason: 1
-};
-
-let mainConfig = {
-  host: "localhost",
-  user: "website",
-  password: "IU*(&THHGkjhgfkjg&",
-  database: `kingsroyale-${settings.currentSeason}`
-};
-const mainConnection = connectDatabase(mainConfig);
-
-
 class Database {
+
+  static mainConnection = connectDatabase(settings.mainConnection);
+  static currentSeasonConnection = connectDatabase(settings.currentSeasonConnection);
+  static prevousSeasonConnection = connectDatabase(settings.prevousSeasonConnection);
 
   static getMainConnection() {
     return mainConnection;
@@ -37,7 +32,7 @@ class Database {
   }
 
   static getPreviousSeasonConnection() {
-    return previousSeasonConnection
+    return previousSeasonConnection;
   }
 
 }

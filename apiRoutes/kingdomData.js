@@ -3,7 +3,7 @@ const api = express.Router();
 const kingdomManager = require("D:/Coding/KingsRoyale/API/utils/managers/kingdomManager.js");
 const responseManager = require("D:/Coding/KingsRoyale/API/utils/managers/responseManager.js");
 const db = require("D:/Coding/KingsRoyale/API/utils/database.js");
-const con = db.getConnection();
+const con = db.getCurrentSeasonConnection();
 const hash = require('object-hash');
 
 api.get('/:kname?', function (req, res) {

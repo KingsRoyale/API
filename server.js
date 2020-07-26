@@ -1,21 +1,6 @@
 const express = require("express");
 const app = express();
 const kingdomData = require("./apiRoutes/kingdomData.js");
-var mysql = require('mysql');
-var db = require('./utils/database.js');
-var con = db.getConnection();
-
-//CREATE USERACCOUNT TABLE
-con.query("CREATE TABLE IF NOT EXISTS userAccounts (username VARCHAR(255), password VARCHAR(255))", function (err, result) {
-  if (err) throw err;
-  console.log("userAccounts: Loaded!");
-});
-//CREATE KINGDOM TABLE 
-con.query("CREATE TABLE IF NOT EXISTS kingdoms (owner VARCHAR(255), name VARCHAR(255), provinces INT(2), towers INT(3), mines INT(3), gold BIGINT, population BIGINT)", function (err, result) {
-  if (err) throw err;
-  console.log("kingdoms: Loaded!");
-});
-
 
 app.enable('verbose errors');
 require('events').EventEmitter.defaultMaxListeners = 0;

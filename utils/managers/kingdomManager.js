@@ -1,5 +1,5 @@
 const db = require("D:/Coding/KingsRoyale/API/utils/database.js");
-const con = db.getConnection();
+const con = db.getCurrentSeasonConnection();
 const defaultGold = 1000;
 const defaultPopulation = 100;
 
