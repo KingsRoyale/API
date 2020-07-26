@@ -15,13 +15,15 @@ function connectDatabase(config) {
       console.log(`Connected to database: ${config.database}`);
     }
   });
+
+  return connection;
 }
 
-class Database {
+const mainConnection = connectDatabase(settings.mainConnection);
+const currentSeasonConnection = connectDatabase(settings.currentSeasonConnection);
+const prevousSeasonConnection = connectDatabase(settings.prevousSeasonConnection);
 
-  static mainConnection = connectDatabase(settings.mainConnection);
-  static currentSeasonConnection = connectDatabase(settings.currentSeasonConnection);
-  static prevousSeasonConnection = connectDatabase(settings.prevousSeasonConnection);
+class Database {
 
   static getMainConnection() {
     return mainConnection;

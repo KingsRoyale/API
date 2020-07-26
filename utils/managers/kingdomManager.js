@@ -1,14 +1,17 @@
 const db = require("D:/Coding/KingsRoyale/API/utils/database.js");
 const con = db.getCurrentSeasonConnection();
-const defaultGold = 1000;
-const defaultPopulation = 100;
+const defaultGold = 10000;
+const defaultWood = 1200;
+const defaultIron = 800;
+const defaultStone = 800;
+const defaultPopulation = 700;
 
 class KingdomManager {
 
-  static createKingdom(owner, name) {
-    con.query("INSERT INTO kingdoms (owner, name, provinces, towers, mines, gold, population) VALUES (?, ?, ?, ?, ?, ?, ?)", [owner, kname, 0, 0, 0, 1000, 100], function(error, response) {
+  static createKingdom(owner, name, description) {
+    con.query("INSERT INTO kingdoms (owner, name, description, population, attack, defense, gold, wood, iron, stone) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)", [owner, name, description, defaultPopulation, 0, 0, defaultGold, defaultWood, defaultIron, defaultStone], function(error, response) {
       if (error) throw error;
-      console.log(`[Kingdom] Kingdom was created with the name: ${kname}`);
+      console.log(`[Kingdom] Kingdom was created with the name: ${name}`);
     });
   }
 
